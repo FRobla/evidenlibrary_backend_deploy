@@ -22,7 +22,7 @@ public class KeycloakService {
 
     private final RestTemplate restTemplate;
     
-    @Value("${keycloak.auth-server-url:http://localhost:8082}")
+    @Value("${keycloak.auth-server-url:https://evidenlibrary-keycloak.onrender.com}")
     private String keycloakServerUrl;
     
     @Value("${keycloak.realm:EvidenLibrary}")
