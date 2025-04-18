@@ -9,4 +9,6 @@ RUN mvn clean package -DskipTests
 FROM amazoncorretto:17-alpine-jdk
 WORKDIR /app
 COPY --from=build /backend/target/backend-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+ENTRYPOINT ["/app/start.sh"]
