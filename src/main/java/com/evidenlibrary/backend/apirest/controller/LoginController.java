@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import com.evidenlibrary.backend.apirest.model.entity.Usuario;
 
 import java.security.Principal;
 
+@CrossOrigin(origins = { "https://evidenlibrary.onrender.com" }, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/login")
 public class LoginController {
