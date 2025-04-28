@@ -26,125 +26,32 @@ public class LibroServiceImpl implements LibroService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Libro> findAll() {
-		List<Libro> libros = libroDao.findAll();
-		// Forzar la carga de las colecciones para cada libro
-		for (Libro libro : libros) {
-			libro.getAutores().size();
-			libro.getGeneros().size();
-			libro.getValoraciones().size();
-			
-			// Actualizar valoración media
-			if(libro.getValoraciones().isEmpty()) {
-				libro.setValoracionMedia(0.0);
-			} else {
-				double suma = libro.getValoraciones().stream()
-								.mapToDouble(valoracion -> valoracion.getPuntuacion())
-								.sum();
-				libro.setValoracionMedia(suma / libro.getValoraciones().size());
-			}
-		}
-		return libros;
+		return (List<Libro>) libroDao.findAll();
 	}
 	
     @Override
     @Transactional(readOnly = true)
     public Page<Libro> findAllPaginado(Pageable pageable) {
-        Page<Libro> page = libroDao.findAll(pageable);
-        
-        // Forzar la carga de las colecciones para cada libro en la página
-        for (Libro libro : page.getContent()) {
-            libro.getAutores().size();
-            libro.getGeneros().size();
-            libro.getValoraciones().size();
-            
-            // Actualizar valoración media
-            if(libro.getValoraciones().isEmpty()) {
-                libro.setValoracionMedia(0.0);
-            } else {
-                double suma = libro.getValoraciones().stream()
-                                .mapToDouble(valoracion -> valoracion.getPuntuacion())
-                                .sum();
-                libro.setValoracionMedia(suma / libro.getValoraciones().size());
-            }
-        }
-        
-        return page;
+        return libroDao.findAll(pageable);
     }
     
     
     @Override
     @Transactional(readOnly = true)
     public Page<Libro> findByAutorIdPaginado(Long autorId, Pageable pageable) {
-        Page<Libro> page = libroDao.findByAutoresId(autorId, pageable);
-        
-        // Forzar la carga de las colecciones para cada libro en la página
-        for (Libro libro : page.getContent()) {
-            libro.getAutores().size();
-            libro.getGeneros().size();
-            libro.getValoraciones().size();
-            
-            // Actualizar valoración media
-            if(libro.getValoraciones().isEmpty()) {
-                libro.setValoracionMedia(0.0);
-            } else {
-                double suma = libro.getValoraciones().stream()
-                                .mapToDouble(valoracion -> valoracion.getPuntuacion())
-                                .sum();
-                libro.setValoracionMedia(suma / libro.getValoraciones().size());
-            }
-        }
-        
-        return page;
+        return libroDao.findByAutoresId(autorId, pageable);
     }
     
     @Override
     @Transactional(readOnly = true)
     public Page<Libro> findByGeneroIdPaginado(Long generoId, Pageable pageable) {
-        Page<Libro> page = libroDao.findByGenerosId(generoId, pageable);
-        
-        // Forzar la carga de las colecciones para cada libro en la página
-        for (Libro libro : page.getContent()) {
-            libro.getAutores().size();
-            libro.getGeneros().size();
-            libro.getValoraciones().size();
-            
-            // Actualizar valoración media
-            if(libro.getValoraciones().isEmpty()) {
-                libro.setValoracionMedia(0.0);
-            } else {
-                double suma = libro.getValoraciones().stream()
-                                .mapToDouble(valoracion -> valoracion.getPuntuacion())
-                                .sum();
-                libro.setValoracionMedia(suma / libro.getValoraciones().size());
-            }
-        }
-        
-        return page;
+        return libroDao.findByGenerosId(generoId, pageable);
     }
     
     @Override
     @Transactional(readOnly = true)
-    public Page<Libro> findByGeneroIdAndAutorIdPaginado(Long generoId, Long autorId, Pageable pageable) {
-        Page<Libro> page = libroDao.findByGenerosIdAndAutoresId(generoId, autorId, pageable);
-        
-        // Forzar la carga de las colecciones para cada libro en la página
-        for (Libro libro : page.getContent()) {
-            libro.getAutores().size();
-            libro.getGeneros().size();
-            libro.getValoraciones().size();
-            
-            // Actualizar valoración media
-            if(libro.getValoraciones().isEmpty()) {
-                libro.setValoracionMedia(0.0);
-            } else {
-                double suma = libro.getValoraciones().stream()
-                                .mapToDouble(valoracion -> valoracion.getPuntuacion())
-                                .sum();
-                libro.setValoracionMedia(suma / libro.getValoraciones().size());
-            }
-        }
-        
-        return page;
+    public Page<Libro> findByGeneroIdAndAutorIdPaginado(Long generoId,Long autorId, Pageable pageable) {
+        return libroDao.findByGenerosIdAndAutoresId(generoId, autorId, pageable);
     }
     
     @Override
@@ -186,24 +93,7 @@ public class LibroServiceImpl implements LibroService {
 	@Override
 	@Transactional(readOnly = true)
 	public Libro findById(Long id) {
-		Libro libro = libroDao.findById(id).orElse(null);
-		if (libro != null) {
-			// Forzar la carga de las colecciones
-			libro.getAutores().size();
-			libro.getGeneros().size();
-			libro.getValoraciones().size();
-			
-			// Actualizar valoración media
-			if(libro.getValoraciones().isEmpty()) {
-				libro.setValoracionMedia(0.0);
-			} else {
-				double suma = libro.getValoraciones().stream()
-								.mapToDouble(valoracion -> valoracion.getPuntuacion())
-								.sum();
-				libro.setValoracionMedia(suma / libro.getValoraciones().size());
-			}
-		}
-		return libro;
+		return libroDao.findById(id).orElse(null);
 	}
 	
 	@Override

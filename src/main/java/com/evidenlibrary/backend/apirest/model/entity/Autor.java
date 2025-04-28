@@ -47,7 +47,7 @@ public class Autor implements Serializable {
     @NotEmpty(message = "no puede estar vacío")
     private String biografia;
 
-    @ManyToMany(mappedBy = "autores", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
     @JsonBackReference
     private final Set<Libro> libros = new HashSet<>();
 
