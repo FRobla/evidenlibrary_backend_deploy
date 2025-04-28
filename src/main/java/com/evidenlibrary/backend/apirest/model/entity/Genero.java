@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.FetchType;
 
 @Entity
 @Table(name = "generos")
@@ -38,7 +39,7 @@ public class Genero implements Serializable{
     @Column(nullable = false)
     private String descripcion;
     
-    @ManyToMany(mappedBy = "generos")
+    @ManyToMany(mappedBy = "generos", fetch = FetchType.EAGER)
     @JsonBackReference
     public final Set<Libro> libros = new HashSet<>();
 

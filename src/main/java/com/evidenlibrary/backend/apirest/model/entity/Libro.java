@@ -57,7 +57,7 @@ public class Libro implements Serializable {
     @Column(nullable = true)
     private String anio;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "libro_autor",
         joinColumns = @JoinColumn(name = "libro_id"),
@@ -65,7 +65,7 @@ public class Libro implements Serializable {
     )
     private final Set<Autor> autores = new HashSet<>();
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "libro_genero",
         joinColumns = @JoinColumn(name = "libro_id"),
